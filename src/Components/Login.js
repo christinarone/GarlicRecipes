@@ -1,25 +1,21 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
+
+
 function Login() {
     const [state, setState] = useState({
         username: "",
         password: "",
+        
     });
-
-    const handleTextChange = (e) => {
-        const { name, value } = e.target;
-        setState((prevState) => {
-            return {
-                ...prevState,
-                [name]: value,
-            };
-        });
-    };
-    console.log("state", state);
+    //Homework: make pages look good, material ui login page example., focus on the front end
+    const handleTextChange = (e) => setState({ ...state, [e.target.name]: e.target.value })
+    //... each of state; username and pw;... can be array or obj
+    console.log("state",);
     return (
         <div>
             <Box
@@ -30,10 +26,11 @@ function Login() {
                 noValidate
                 autoComplete="off"
             >
-                <Stack spacing={2} direction="row">
+                <Stack spacing={3} direction="row">
                     <TextField
                         required
                         onChange={handleTextChange}
+                        //the text will change when they type
                         //all events start with "on"
                         value={state.username}
                         id="outlined-required"

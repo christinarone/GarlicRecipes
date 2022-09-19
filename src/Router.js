@@ -1,25 +1,38 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { BrowserRouter } from "react-router-dom"
-// Write component imports here //
+import { Routes, Route, Navigate } from 'react-router'
+import cookie from 'cookie'
 import Home from './Components/Home'
-// import About from './components/About'
 import Login from './Components/Login'
+import Register from './Components/Register'
+import Navbar from './Components/NavBar'
+import Recipes from './Components/Recipes'
 
-// import ProtectedRoute from './components/ProtectedRoute'
+// Write checkAuth function here
+// Check the cookies for a cookie called "loggedIn"
+const checkAuth = () => {
+    const cookies = cookie.parse(document.cookie);
+    return cookies["loggedIn"] ? true : false;
+};
 
-// Start Router function here //
+// Write ProtectedRoute function here
+const ProtectedRoute = (props) => {
+
+    const { component: Component, ...rest } = props;
+
+    return (
+        checkAuth() === true ? (<Component {...rest} />) : (<Navigate to="/login" />)
+    );
+};
+
 const Router = () => {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                {/* <Route path="/recipe/:id" element={<Recipe/>} /> */}
-                <Route path="/login" element={<Login />} />
-                {/* <Route path="/about" element={<ProtectedRoute component={About} />} /> */}
-            </Routes>
-        </BrowserRouter>
-    )
-}
+        <Routes>
+            <Route path="/home" element={<ProtectedRoute component={Home} />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/recipes/:id" element={<ProtectedRoute component={Recipes} />} />
+        </Routes>
+    );
+};
 
-export default Router
+export default Router;
