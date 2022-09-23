@@ -30,7 +30,7 @@ const Router = () => {
             <Route path="/home" element={<ProtectedRoute component={Home} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/recipes/:id" element={<ProtectedRoute component={Recipes} />} />
+            <Route path="/recipes" element={<ProtectedRoute component={Recipes} />} />
         </Routes>
     );
 };

@@ -14,11 +14,11 @@ export default function RecipeCard(props) {
         boxShadow: "5px 5px, 5px",
       }}
     >
-      <h3>{meals.name}</h3>
+      {/* <h3>{recipe.strMeal}</h3> */}
       <p>
-        MEAL: {recipe.meal} | INGREDIENT: {recipe.ingredient}
+        {/* MEAL: {recipe.meal} | INGREDIENT: {recipe.ingredient} */}
       </p>
-      <p>{meals.description}</p>
+      {/* <p>{meals.description}</p> */}
       {!like ? (
         <button
           onClick={() => {

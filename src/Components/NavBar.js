@@ -15,7 +15,7 @@ const Navbar = () => {
         justifyContent: 'space-between',
         backgroundColor: 'white'
       }}>
-        <h1 style={{ color: "#FF5C5C " }}><Link to="/Home">MyGarlicRecipes</Link></h1>
+        <h1 style={{ color: "#FF5C5C " }}><Link to="/recipes">MyGarlicRecipes</Link></h1>
         <h1 style={{ color: "rgb(247,191,118) " }}><Link to="/about">About</Link></h1>
         <h1 style={{ color: "#8BB09D " }}><Link to="/Upload">Upload</Link></h1>
         <h1 style={{ color: "#B475AA " }} onClick={() => {

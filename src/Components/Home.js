@@ -32,13 +32,13 @@ class Home extends Component {
     };
 
 
-    componentDidMount() {
-        axios.get(`https://christinaronefirstapp.herokuapp.com/garlicrecipes/userentries/${userID}`)
-            .then(res => {
-                const arrayOfEntries = res.data;
-                this.setState({ arrayOfEntries })
-            })
-    };
+    // componentDidMount() {
+    //     axios.get(`https://christinaronefirstapp.herokuapp.com/garlicrecipes/userentries/${userID}`)
+    //         .then(res => {
+    //             const arrayOfEntries = res.data;
+    //             this.setState({ arrayOfEntries })
+    //         })
+    // };
 
 
     handleChange(e) {
