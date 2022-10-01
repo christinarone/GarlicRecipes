@@ -28,7 +28,7 @@ function Recipes() {
 
 
   return (
-    <div className="App" >
+    <div>
       <TextField
         onChange={handleInputChange}
         value={input}

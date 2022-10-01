@@ -13,12 +13,12 @@ const Navbar = () => {
       <Toolbar style={{
         display: 'flex',
         justifyContent: 'space-between',
-        backgroundColor: 'cream'
+        backgroundColor: 'off-white'
       }}>
-        <h1 style={{ color: "gold" }}><Link to="/recipes">MyRecipes</Link></h1>
-        <h1 style={{ color: "green" }}><Link to="/about">Login</Link></h1>
-        <h1 style={{ color: "purple " }}><Link to="/Upload">Upload</Link></h1>
-        <h1 style={{ color: "pink" }} onClick={() => {
+        <h1 style={{ color: "#00d4ff" }}><Link to="/recipes">MyRecipes</Link></h1>
+        <h1 style={{ color: "#00d4ff" }}><Link to="/about">Login</Link></h1>
+        <h1 style={{ color: "#00d4ff" }}><Link to="/Upload">Upload</Link></h1>
+        <h1 style={{ color: "#00d4ff" }} onClick={() => {
           document.cookie = cookie.serialize("loggedIn", null, {
             maxAge: 0,
           });
