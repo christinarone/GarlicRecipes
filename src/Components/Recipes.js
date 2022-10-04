@@ -22,9 +22,9 @@ function Recipes() {
   const handleInputChange = (e) => setInput(e.target.value)
 
   console.log("recipes", input)
-  if (recipes.length < 1) {
-    return <h1>LOADING...</h1>
-  }
+  // if (recipes.length < 1) {
+  // return <h1>LOADING...</h1>
+  // }
 
 
   return (

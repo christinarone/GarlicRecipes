@@ -1,5 +1,6 @@
 import { dividerClasses } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -17,13 +18,12 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
+
 // import { checkAuth } from "../App"
 // import { Link } from "react-dom";
 
 export function RecipeCard(props) {
-  console.log("props right here", props);
-
-
+  // console.log("props right here", props);
   const [cards, setCards] = useState([]);
   const [flip, setFlip] = useState(false);
 
@@ -38,9 +38,24 @@ export function RecipeCard(props) {
     }),
   }));
   const [expanded, setExpanded] = React.useState(false);
+  const [favorite, setFavorite] = React.useState(false)
+  const favoriteStyle = favorite ? "red" : "grey"
+  // const favoriteStyle = favorite ? { color: "red" } : { color: "grey" }
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleAddFavorite = async (item) => {
+    console.log("clickedItem", item)
+    const user_id = localStorage.getItem("userId")
+    const body = { user_id, recipe_name: "", recipe_description: "" }
+    try {
+      await axios.post("http://localhost:3330/recipes/new-recipe", body)
+    } catch (error) {
+      console.error("error adding favorite", error)
+    }
+    setFavorite(!favorite);
   };
 
   return (
@@ -73,8 +88,12 @@ export function RecipeCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="add to favorites"
+          onClick={() => handleAddFavorite(props.recipe)}
+          aria-expanded={favorite}
+        //10-2 homework
+        >
+          <FavoriteIcon style={{ color: favoriteStyle }} />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
