@@ -48,10 +48,12 @@ export function RecipeCard(props) {
 
   const handleAddFavorite = async (item) => {
     console.log("clickedItem", item)
+    const token = localStorage.getItem("token")
     const user_id = localStorage.getItem("userId")
-    const body = { user_id, recipe_name: "", recipe_description: "" }
+    const body = { user_id, recipe_name: item.strMeal, recipe_description: item.strInstructions }
     try {
-      await axios.post("http://localhost:3330/recipes/new-recipe", body)
+      const header = { headers: { Authorization: `Bearer ${token}` } }
+      await axios.post("https://newapp12345678.herokuapp.com/recipes/new-recipe", body, header)
     } catch (error) {
       console.error("error adding favorite", error)
     }
@@ -91,7 +93,6 @@ export function RecipeCard(props) {
         <IconButton aria-label="add to favorites"
           onClick={() => handleAddFavorite(props.recipe)}
           aria-expanded={favorite}
-        //10-2 homework
         >
           <FavoriteIcon style={{ color: favoriteStyle }} />
         </IconButton>

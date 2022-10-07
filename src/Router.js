@@ -10,8 +10,8 @@ import Recipes from './Components/Recipes'
 // Write checkAuth function here
 // Check the cookies for a cookie called "loggedIn"
 const checkAuth = () => {
-    const cookies = cookie.parse(document.cookie);
-    return cookies["loggedIn"] ? true : false;
+    const loggedIn = localStorage.getItem("loggedIn")
+    return loggedIn ? true : false;
 };
 
 // Write ProtectedRoute function here

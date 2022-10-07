@@ -26,6 +26,7 @@ function Login() {
             console.log("hello", data)
             localStorage.setItem("userName", state.user_name)
             localStorage.setItem("userId", data.userid)
+            localStorage.setItem("token", data.token)
             localStorage.setItem("loggedIn", "true")
             navigate("/recipes")
         } catch (error) {
