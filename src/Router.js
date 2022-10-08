@@ -5,6 +5,7 @@ import Home from './Components/Home'
 import Login from './Components/Login'
 import Register from './Components/Register'
 import Navbar from './Components/NavBar'
+import Search from './Components/Search'
 import Recipes from './Components/Recipes'
 
 // Write checkAuth function here
@@ -30,7 +31,9 @@ const Router = () => {
             <Route path="/home" element={<ProtectedRoute component={Home} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/recipes" element={<ProtectedRoute component={Recipes} />} />
+            <Route path="/recipes" element={<Recipes />} />
+
+            <Route path="/search" element={<ProtectedRoute component={Search} />} />
         </Routes>
     );
 };

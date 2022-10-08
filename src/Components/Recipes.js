@@ -7,36 +7,24 @@ import RecipeCard from './RecipeCard'
 import axios from 'axios';
 
 function Recipes() {
-  const [recipes, setRecipes] = useState([]);
-
-  const [input, setInput] = useState("")
+  const [myRecipes, setMyRecipes] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`)
+    const userID = localStorage.getItem("userId")
+    const body = { id: userID }
+    const token = localStorage.getItem("token")
+    const headers = { headers: { Authorization: `Bearer ${token}` } }
+    axios.get(`https://newapp12345678.herokuapp.com/recipes/`, body, headers)
       .then((data) => {
-        console.log(data.data.meals)
-        setRecipes(data.data.meals)
+        console.log("myRecioes data", data)
+        setMyRecipes(data.data.meals)
       })
-  }, [input])
-
-  const handleInputChange = (e) => setInput(e.target.value)
-
-  console.log("recipes", input)
-  // if (recipes.length < 1) {
-  // return <h1>LOADING...</h1>
-  // }
-
+  }, [])
 
   return (
     <div>
-      <TextField
-        onChange={handleInputChange}
-        value={input}
-        id="outlined-basic"
-        label="Search"
-        variant="outlined"
-      />
-      {recipes.map((recipe) => {
+
+      {myRecipes.map((recipe) => {
         return (
           <RecipeCard recipe={recipe} />
         )

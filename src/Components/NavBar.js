@@ -6,7 +6,7 @@ import cookie from "cookie";
 
 const Navbar = () => {
   const navigate = useNavigate();
-
+  const loggedIn = localStorage.getItem("loggedIn")
   return (
     <AppBar position="sticky"
     >
@@ -15,9 +15,7 @@ const Navbar = () => {
         justifyContent: 'space-between',
         backgroundColor: 'off-white'
       }}>
-        <h1 style={{ color: "#00d4ff" }}><Link to="/recipes">Search</Link></h1>
-        <h1 style={{ color: "#00d4ff" }}><Link to="/login">Login</Link></h1>
-        <h1 style={{ color: "#00d4ff" }}><Link to="/logout">Logout</Link></h1>
+        <h1 style={{ color: "#00d4ff" }}><Link to="/search">Search</Link></h1>
         <h1 style={{ color: "#00d4ff" }}><Link to="/recipes">MyRecipes</Link></h1>
         <h1 style={{ color: "#00d4ff" }} onClick={() => {
           document.cookie = cookie.serialize("loggedIn", null, {
@@ -32,6 +30,8 @@ const Navbar = () => {
           navigate("/Login");
         }}
         >Upload</h1>
+        {!loggedIn ? (<h1 style={{ color: "#00d4ff" }}><Link to="/login">Login</Link></h1>) :
+          null}
       </Toolbar>
     </AppBar>
   );
