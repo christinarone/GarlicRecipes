@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import RecipeCard from './RecipeCard'
 import axios from 'axios';
+import MyRecipeCard from './MyRecipeCard';
 
 function Recipes() {
   const [myRecipes, setMyRecipes] = useState([]);
@@ -17,16 +18,16 @@ function Recipes() {
     axios.get(`https://newapp12345678.herokuapp.com/recipes/`, body, headers)
       .then((data) => {
         console.log("myRecioes data", data)
-        setMyRecipes(data.data.meals)
+        setMyRecipes(data.data)
       })
   }, [])
-
+  //run get on 18 get recipe function to call it for next time
   return (
     <div>
 
       {myRecipes.map((recipe) => {
         return (
-          <RecipeCard recipe={recipe} />
+          <MyRecipeCard recipe={recipe} />
         )
       })}
     </div>

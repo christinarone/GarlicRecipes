@@ -18,11 +18,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-
-// import { checkAuth } from "../App"
-// import { Link } from "react-dom";
-
-export function RecipeCard(props) {
+export function MyRecipeCard(props) {
   // console.log("props right here", props);
   const [cards, setCards] = useState([]);
   const [flip, setFlip] = useState(false);
@@ -46,18 +42,18 @@ export function RecipeCard(props) {
     setExpanded(!expanded);
   };
 
-  const handleAddFavorite = async (item) => {
+  const handleRemoveFavorite = async (item) => {
     console.log("clickedItem", item)
     const token = localStorage.getItem("token")
     const user_id = localStorage.getItem("userId")
-    const body = { user_id, recipe_name: item.strMeal, recipe_description: item.strInstructions, recipe_thumbnail: item.strMealThumb }
     try {
       const header = { headers: { Authorization: `Bearer ${token}` } }
-      await axios.post("https://newapp12345678.herokuapp.com/recipes/new-recipe", body, header)
+      await axios.delete(`https://newapp12345678.herokuapp.com/recipes/${item.id}`, header)
+
     } catch (error) {
-      console.error("error adding favorite", error)
+      console.error("error removing favorite", error)
     }
-    setFavorite(!favorite);
+    // setFavorite(!favorite);
   };
 
   return (
@@ -73,15 +69,15 @@ export function RecipeCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.recipe.strMeal}
-        foodType={props.recipe.strArea}
+        title={props.recipe.recipe_name}
+      // foodType={props.recipe.strArea}
       // subheader="September 14, 2016"
       />
       <CardMedia
         component="img"
         height="194"
-        image={props.recipe.strMealThumb}
-        alt={props.recipe.strCategory}
+        image={props.recipe.recipe_thumbnail}
+      // alt={props.recipe.strCategory}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -91,10 +87,10 @@ export function RecipeCard(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites"
-          onClick={() => handleAddFavorite(props.recipe)}
+          onClick={() => handleRemoveFavorite(props.recipe)}
           aria-expanded={favorite}
         >
-          <FavoriteIcon style={{ color: favoriteStyle }} />
+          <FavoriteIcon style={{ color: "red" }} />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
@@ -112,11 +108,11 @@ export function RecipeCard(props) {
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
-            {props.recipe.strInstructions}
+            {props.recipe.recipe_description}
           </Typography>
         </CardContent>
       </Collapse>
     </Card>
   );
 }
-export default RecipeCard
+export default MyRecipeCard
